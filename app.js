@@ -74,8 +74,6 @@ function click() {
   display();
   var formElOne = document.getElementById('one');
   formElOne.addEventListener('click', function(event) {
-    event.preventDefault();
-    event.stopPropagation();
     nameDisplayed[0].clicked++;
     count++;
     console.log(count);
@@ -94,8 +92,6 @@ function click() {
   },false);
   var formElTwo = document.getElementById('two');
   formElTwo.addEventListener('click', function(event) {
-    event.preventDefault();
-    event.stopPropagation();
     nameDisplayed[1].clicked++;
     count++;
     console.log(count);
@@ -114,8 +110,6 @@ function click() {
   },false);
   var formElThree = document.getElementById('three');
   formElThree.addEventListener('click', function(event) {
-    event.preventDefault();
-    event.stopPropagation();
     nameDisplayed[2].clicked++;
     count++;
     console.log(count);
