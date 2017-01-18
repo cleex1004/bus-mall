@@ -4,6 +4,9 @@ var numberArray = [];
 var pictureArray = [];
 var numberDisplayed = [];
 var pictureDisplayed = [];
+var totalDisplayed = [];
+var clicked = [];
+var count = 0;
 
 //product constructor
 function Product(number, description, picture) {
@@ -20,22 +23,65 @@ function Product(number, description, picture) {
 function randomNumber() {
   var min = Math.ceil(1);
   var max = Math.floor(20);
-  for (var u = 0; u < 3; u++) {
-    numberDisplayed.push(numberArray[Math.floor(Math.random() * (max - min)) + min]);
-    pictureDisplayed.push(pictureArray[Math.floor(Math.random() * (max - min)) + min]);
-  };
+  do {
+    var numone = Math.floor(Math.random() * (max - min)) + min;
+    var numtwo = Math.floor(Math.random() * (max - min)) + min;
+    var numthree = Math.floor(Math.random() * (max - min)) + min;
+  } while (numone === numtwo || numone === numthree || numtwo === numthree);
+  numberDisplayed.push(numberArray[numone], numberArray[numtwo], numberArray[numthree]);
+  pictureDisplayed.push(pictureArray[numone], pictureArray[numtwo], pictureArray[numthree]);
+  totalDisplayed.push(numberArray[numone], numberArray[numtwo], numberArray[numthree]);
 };
 
+//displays images as clickable button
 function display() {
-  var legendEl = document.getElementById('here');
-  for (var v = 0; v < 3; v++) {
-    var inputEl = document.createElement('input');
-    inputEl.setAttribute('type', 'image');
-    inputEl.setAttribute('src', '/img/' + pictureDisplayed[v] + '.jpg');
-    legendEl.appendChild(inputEl);
-  }
+  var inputElOne = document.getElementById('one');
+  inputElOne.setAttribute('src', 'img/' + pictureDisplayed[0] + '.jpg');
+  var inputElTwo = document.getElementById('two');
+  inputElTwo.setAttribute('src', 'img/' + pictureDisplayed[1] + '.jpg');
+  var inputElThree = document.getElementById('three');
+  inputElThree.setAttribute('src', 'img/' + pictureDisplayed[2] + '.jpg');
 };
 
+var formElOne = document.getElementById('one');
+formElOne.addEventListener('click', function(event) {
+  event.preventDefault();
+  event.stopPropagation();
+  clicked.push(numberDisplayed[0]);
+  numberDisplayed = [];
+  pictureDisplayed = [];
+  randomNumber();
+  display();
+  count++;
+},false);
+
+var formElTwo = document.getElementById('two');
+formElTwo.addEventListener('click', function(event) {
+  event.preventDefault();
+  event.stopPropagation();
+  clicked.push(numberDisplayed[1]);
+  numberDisplayed = [];
+  pictureDisplayed = [];
+  randomNumber();
+  display();
+  count++;
+},false);
+
+var formElThree = document.getElementById('three');
+formElThree.addEventListener('click', function(event) {
+  event.preventDefault();
+  event.stopPropagation();
+  clicked.push(numberDisplayed[2]);
+  numberDisplayed = [];
+  pictureDisplayed = [];
+  randomNumber();
+  display();
+  count++;
+},false);
+
+if(count === 25){
+  //print table of totals!;
+}
 //create all products
 var bag = new Product(1, 'Starwars Suitcase', 'bag');
 var banana = new Product(2, 'Banana Slicer', 'banana');
