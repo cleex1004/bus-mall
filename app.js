@@ -23,7 +23,7 @@ function Product(number, description, picture) {
   nameArray.push(this);
 };
 
-//random number function
+//creates random number
 function randomNumber() {
   var min = Math.ceil(0);
   var max = Math.floor(20);
@@ -39,7 +39,6 @@ function randomNumber() {
   nameArray[numtwo].shown++;
   nameArray[numthree].shown++;
 };
-
 //displays images as clickable button
 function display() {
   var inputElOne = document.getElementById('one');
@@ -49,7 +48,7 @@ function display() {
   var inputElThree = document.getElementById('three');
   inputElThree.setAttribute('src', 'img/' + pictureDisplayed[2] + '.jpg');
 };
-
+//logs clicks
 function click() {
   randomNumber();
   display();
@@ -63,7 +62,7 @@ function click() {
     numberDisplayed = [];
     pictureDisplayed = [];
     nameDisplayed = [];
-    if(count < 26) {
+    if(count < 25) {
       randomNumber();
       display();
     } else {
@@ -82,7 +81,7 @@ function click() {
     numberDisplayed = [];
     pictureDisplayed = [];
     nameDisplayed = [];
-    if(count < 26) {
+    if(count < 25) {
       randomNumber();
       display();
     } else {
@@ -101,7 +100,7 @@ function click() {
     numberDisplayed = [];
     pictureDisplayed = [];
     nameDisplayed = [];
-    if(count < 26) {
+    if(count < 25) {
       randomNumber();
       display();
     } else {
@@ -109,16 +108,21 @@ function click() {
     };
   },false);
 };
-
+//prints totals
 function total() {
   var resultsEl = document.getElementById('results');
   for (var w = 0; w < nameArray.length; w++) {
     var resultsLi = document.createElement('li');
     resultsLi.setAttribute('id', 'here');
-    resultsLi.textContent = pictureArray[w] + ' shown: ' + nameArray[w].shown + ' clicked: ' + nameArray[w].clicked;
+    resultsLi.textContent = pictureArray[w] + ' shown: ' + nameArray[w].shown + ', clicked: ' + nameArray[w].clicked + ', percentage clicked: ' + percent(nameArray[w].clicked, nameArray[w].shown) + '%';
     resultsEl.appendChild(resultsLi);
   };
 };
+//calculates percent
+function percent(clicked, shown) {
+  return ((clicked / shown) * 100).toFixed(2);
+}
+
 //create all products
 var bag = new Product(1, 'Starwars Suitcase', 'bag');
 var banana = new Product(2, 'Banana Slicer', 'banana');
@@ -141,7 +145,4 @@ var usb = new Product(18, 'Tentacle Usb', 'usb');
 var watercan = new Product(19, 'Watering Can', 'watercan');
 var wineglass = new Product(20, 'Wine Glass', 'wineglass');
 //call functions
-// randomNumber();
-// display();
 click();
-// total();
