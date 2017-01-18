@@ -48,6 +48,11 @@ function display() {
   var inputElThree = document.getElementById('three');
   inputElThree.setAttribute('src', 'img/' + pictureDisplayed[2] + '.jpg');
 };
+//removes images
+function remove() {
+  var removeEl = document.getElementById('form');
+  removeEl.parentElement.removeChild(removeEl);
+};
 //logs clicks
 function click() {
   randomNumber();
@@ -67,6 +72,7 @@ function click() {
       display();
     } else {
       total();
+      remove();
     };
     randomNumber();
     display();
@@ -86,6 +92,7 @@ function click() {
       display();
     } else {
       total();
+      remove();
     };
     randomNumber();
     display();
@@ -105,6 +112,7 @@ function click() {
       display();
     } else {
       total();
+      remove();
     };
   },false);
 };
