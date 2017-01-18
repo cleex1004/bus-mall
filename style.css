@@ -1,0 +1,33 @@
+body {
+  background-color: #ccffff;
+  font-family: helvetica;
+  color: #000099;
+}
+h1 {
+  font-family: 'aldrich';
+  text-align: center;
+  font-size: 50px;
+}
+h2 {
+  font-family: 'aldrich';
+  text-align: center;
+  font-size: 35px;
+
+}
+#form {
+  font-size: 25px;
+}
+ul {
+  font-size: 20px;
+}
+#head {
+  border: 3px dotted #e60000;
+  margin: 15px;
+}
+#torso {
+  margin: 15px;
+}
+#legs {
+  border: 3px dotted #e60000;
+  margin: 15px;
+}
