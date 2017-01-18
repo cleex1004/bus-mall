@@ -2,15 +2,14 @@
 //global variables
 var numberArray = [];
 var pictureArray = [];
+var nameArray = [];
 var numberDisplayed = [];
 var pictureDisplayed = [];
 var totalDisplayed = [];
-var clicked = [];
 var count = 0;
 var numone = 0;
 var numtwo = 0;
 var numthree = 0;
-var nameArray = [];
 var nameDisplayed = [];
 
 //product constructor
@@ -36,8 +35,6 @@ function randomNumber() {
   } while (numone === numtwo || numone === numthree || numtwo === numthree);
   numberDisplayed.push(numberArray[numone], numberArray[numtwo], numberArray[numthree]);
   pictureDisplayed.push(pictureArray[numone], pictureArray[numtwo], pictureArray[numthree]);
-  totalDisplayed.push(numberArray[numone], numberArray[numtwo], numberArray[numthree]);
-  ;
   nameDisplayed.push(nameArray[numone], nameArray[numtwo], nameArray[numthree]);
   nameArray[numone].shown++;
   nameArray[numtwo].shown++;
@@ -58,7 +55,6 @@ var formElOne = document.getElementById('one');
 formElOne.addEventListener('click', function(event) {
   event.preventDefault();
   event.stopPropagation();
-  // clicked.push(numberDisplayed[0]);
   nameDisplayed[0].clicked++;
   numberDisplayed = [];
   pictureDisplayed = [];
@@ -66,8 +62,6 @@ formElOne.addEventListener('click', function(event) {
   randomNumber();
   display();
   count++;
-  var oldEl = document.getElementById('results');
-  oldEl.remove;
   total();
 },false);
 
@@ -75,7 +69,6 @@ var formElTwo = document.getElementById('two');
 formElTwo.addEventListener('click', function(event) {
   event.preventDefault();
   event.stopPropagation();
-  // clicked.push(numberDisplayed[1]);
   nameDisplayed[1].clicked++;
   numberDisplayed = [];
   pictureDisplayed = [];
@@ -83,8 +76,6 @@ formElTwo.addEventListener('click', function(event) {
   randomNumber();
   display();
   count++;
-  var oldEl = document.getElementById('results');
-  oldEl.remove;
   total();
 },false);
 
@@ -92,7 +83,6 @@ var formElThree = document.getElementById('three');
 formElThree.addEventListener('click', function(event) {
   event.preventDefault();
   event.stopPropagation();
-  // clicked.push(numberDisplayed[2]);
   nameDisplayed[2].clicked++;
   numberDisplayed = [];
   pictureDisplayed = [];
@@ -100,8 +90,6 @@ formElThree.addEventListener('click', function(event) {
   randomNumber();
   display();
   count++;
-  var oldEl = document.getElementById('results');
-  oldEl.remove;
   total();
 },false);
 
@@ -135,6 +123,7 @@ var unicorn = new Product(17, 'Unicorn Meat Can', 'unicorn');
 var usb = new Product(18, 'Tentacle Usb', 'usb');
 var watercan = new Product(19, 'Watering Can', 'watercan');
 var wineglass = new Product(20, 'Wine Glass', 'wineglass');
-
+//call functions
 randomNumber();
 display();
+total();
