@@ -5,12 +5,11 @@ var pictureArray = [];
 var nameArray = [];
 var numberDisplayed = [];
 var pictureDisplayed = [];
-var totalDisplayed = [];
+var nameDisplayed = [];
 var count = 0;
 var numone = 0;
 var numtwo = 0;
 var numthree = 0;
-var nameDisplayed = [];
 
 //product constructor
 function Product(number, description, picture) {
@@ -26,7 +25,7 @@ function Product(number, description, picture) {
 
 //random number function
 function randomNumber() {
-  var min = Math.ceil(1);
+  var min = Math.ceil(0);
   var max = Math.floor(20);
   do {
     numone = Math.floor(Math.random() * (max - min)) + min;
@@ -51,47 +50,65 @@ function display() {
   inputElThree.setAttribute('src', 'img/' + pictureDisplayed[2] + '.jpg');
 };
 
-var formElOne = document.getElementById('one');
-formElOne.addEventListener('click', function(event) {
-  event.preventDefault();
-  event.stopPropagation();
-  nameDisplayed[0].clicked++;
-  numberDisplayed = [];
-  pictureDisplayed = [];
-  nameDisplayed = [];
+function click() {
   randomNumber();
   display();
-  count++;
-  total();
-},false);
-
-var formElTwo = document.getElementById('two');
-formElTwo.addEventListener('click', function(event) {
-  event.preventDefault();
-  event.stopPropagation();
-  nameDisplayed[1].clicked++;
-  numberDisplayed = [];
-  pictureDisplayed = [];
-  nameDisplayed = [];
-  randomNumber();
-  display();
-  count++;
-  total();
-},false);
-
-var formElThree = document.getElementById('three');
-formElThree.addEventListener('click', function(event) {
-  event.preventDefault();
-  event.stopPropagation();
-  nameDisplayed[2].clicked++;
-  numberDisplayed = [];
-  pictureDisplayed = [];
-  nameDisplayed = [];
-  randomNumber();
-  display();
-  count++;
-  total();
-},false);
+  var formElOne = document.getElementById('one');
+  formElOne.addEventListener('click', function(event) {
+    event.preventDefault();
+    event.stopPropagation();
+    nameDisplayed[0].clicked++;
+    count++;
+    console.log(count);
+    numberDisplayed = [];
+    pictureDisplayed = [];
+    nameDisplayed = [];
+    if(count < 26) {
+      randomNumber();
+      display();
+    } else {
+      total();
+    };
+    randomNumber();
+    display();
+  },false);
+  var formElTwo = document.getElementById('two');
+  formElTwo.addEventListener('click', function(event) {
+    event.preventDefault();
+    event.stopPropagation();
+    nameDisplayed[1].clicked++;
+    count++;
+    console.log(count);
+    numberDisplayed = [];
+    pictureDisplayed = [];
+    nameDisplayed = [];
+    if(count < 26) {
+      randomNumber();
+      display();
+    } else {
+      total();
+    };
+    randomNumber();
+    display();
+  },false);
+  var formElThree = document.getElementById('three');
+  formElThree.addEventListener('click', function(event) {
+    event.preventDefault();
+    event.stopPropagation();
+    nameDisplayed[2].clicked++;
+    count++;
+    console.log(count);
+    numberDisplayed = [];
+    pictureDisplayed = [];
+    nameDisplayed = [];
+    if(count < 26) {
+      randomNumber();
+      display();
+    } else {
+      total();
+    };
+  },false);
+};
 
 function total() {
   var resultsEl = document.getElementById('results');
@@ -124,6 +141,7 @@ var usb = new Product(18, 'Tentacle Usb', 'usb');
 var watercan = new Product(19, 'Watering Can', 'watercan');
 var wineglass = new Product(20, 'Wine Glass', 'wineglass');
 //call functions
-randomNumber();
-display();
-total();
+// randomNumber();
+// display();
+click();
+// total();
