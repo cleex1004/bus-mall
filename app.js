@@ -33,6 +33,10 @@ function randomNumber() {
     numtwo = Math.floor(Math.random() * (max - min)) + min;
     numthree = Math.floor(Math.random() * (max - min)) + min;
   } while (numone === numtwo || numone === numthree || numtwo === numthree);
+  //  || numberDisplayed[0] === numone || numberDisplayed[1] === numone || numberDisplayed[2] === numone || numberDisplayed[0] === numtwo || numberDisplayed[1] === numtwo || numberDisplayed[2] === numtwo || numberDisplayed[0] === numthree || numberDisplayed[1] === numthree || numberDisplayed[2] === numthree
+  // numberDisplayed = [];
+  // pictureDisplayed = [];
+  // nameDisplayed = [];
   numberDisplayed.push(numberArray[numone], numberArray[numtwo], numberArray[numthree]);
   pictureDisplayed.push(pictureArray[numone], pictureArray[numtwo], pictureArray[numthree]);
   nameDisplayed.push(nameArray[numone], nameArray[numtwo], nameArray[numthree]);
