@@ -8,9 +8,6 @@ var numberDisplayed = [];
 var pictureDisplayed = [];
 var nameDisplayed = [];
 var count = 0;
-var numone = 0;
-var numtwo = 0;
-var numthree = 0;
 
 //product constructor
 function Product(number, description, picture) {
@@ -26,23 +23,26 @@ function Product(number, description, picture) {
 
 //creates random number
 function randomNumber() {
-  var min = Math.ceil(0);
-  var max = Math.floor(20);
-  do {
-    numone = Math.floor(Math.random() * (max - min)) + min;
-    numtwo = Math.floor(Math.random() * (max - min)) + min;
-    numthree = Math.floor(Math.random() * (max - min)) + min;
-  } while (numone === numtwo || numone === numthree || numtwo === numthree);
-  //  || numberDisplayed[0] === numone || numberDisplayed[1] === numone || numberDisplayed[2] === numone || numberDisplayed[0] === numtwo || numberDisplayed[1] === numtwo || numberDisplayed[2] === numtwo || numberDisplayed[0] === numthree || numberDisplayed[1] === numthree || numberDisplayed[2] === numthree
-  // numberDisplayed = [];
-  // pictureDisplayed = [];
-  // nameDisplayed = [];
-  numberDisplayed.push(numberArray[numone], numberArray[numtwo], numberArray[numthree]);
-  pictureDisplayed.push(pictureArray[numone], pictureArray[numtwo], pictureArray[numthree]);
-  nameDisplayed.push(nameArray[numone], nameArray[numtwo], nameArray[numthree]);
-  nameArray[numone].shown++;
-  nameArray[numtwo].shown++;
-  nameArray[numthree].shown++;
+  return Math.floor(Math.random() * (20 - 0)) + 0;
+};
+//chooses product to display
+function chooseProduct() {
+  var num;
+  for (var i = 0; i < 3; i++) {
+    do {
+      num = randomNumber();
+    } while (numberDisplayed.includes(num));
+    numberDisplayed.push(num);
+  };
+  if (numberDisplayed.length > 3) {
+    numberDisplayed.splice(0,3);
+  };
+  console.log(numberDisplayed);
+  pictureDisplayed.push(pictureArray[numberDisplayed[0]], pictureArray[numberDisplayed[1]], pictureArray[numberDisplayed[2]]);
+  nameDisplayed.push(nameArray[numberDisplayed[0]], nameArray[numberDisplayed[1]], nameArray[numberDisplayed[2]]);
+  nameArray[numberDisplayed[0]].shown++;
+  nameArray[numberDisplayed[1]].shown++;
+  nameArray[numberDisplayed[2]].shown++;
 };
 //displays images as clickable button
 function display() {
@@ -60,10 +60,10 @@ function percent(clicked, shown) {
 //prints totals/results list
 function total() {
   var resultsEl = document.getElementById('results');
-  for (var w = 0; w < nameArray.length; w++) {
+  for (var j = 0; j < nameArray.length; j++) {
     var resultsLi = document.createElement('li');
     resultsLi.setAttribute('id', 'here');
-    resultsLi.textContent = pictureArray[w] + '- shown: ' + nameArray[w].shown + ', clicked: ' + nameArray[w].clicked + ', percentage clicked: ' + percent(nameArray[w].clicked, nameArray[w].shown) + '%';
+    resultsLi.textContent = pictureArray[j] + '- shown: ' + nameArray[j].shown + ', clicked: ' + nameArray[j].clicked + ', percentage clicked: ' + percent(nameArray[j].clicked, nameArray[j].shown) + '%';
     resultsEl.appendChild(resultsLi);
   };
 };
@@ -74,54 +74,53 @@ function remove() {
 };
 //logs clicks
 function click() {
-  randomNumber();
+  chooseProduct();
   display();
   var formElOne = document.getElementById('one');
   formElOne.addEventListener('click', function(event) {
+    event.preventDefault();
+    event.stopPropagation();
     nameDisplayed[0].clicked++;
     count++;
     console.log(count);
-    numberDisplayed = [];
     pictureDisplayed = [];
     nameDisplayed = [];
     if(count < 25) {
-      randomNumber();
+      chooseProduct();
       display();
     } else {
       total();
       remove();
     };
-    randomNumber();
-    display();
   },false);
   var formElTwo = document.getElementById('two');
   formElTwo.addEventListener('click', function(event) {
+    event.preventDefault();
+    event.stopPropagation();
     nameDisplayed[1].clicked++;
     count++;
     console.log(count);
-    numberDisplayed = [];
     pictureDisplayed = [];
     nameDisplayed = [];
     if(count < 25) {
-      randomNumber();
+      chooseProduct();
       display();
     } else {
       total();
       remove();
     };
-    randomNumber();
-    display();
   },false);
   var formElThree = document.getElementById('three');
   formElThree.addEventListener('click', function(event) {
+    event.preventDefault();
+    event.stopPropagation();
     nameDisplayed[2].clicked++;
     count++;
     console.log(count);
-    numberDisplayed = [];
     pictureDisplayed = [];
     nameDisplayed = [];
     if(count < 25) {
-      randomNumber();
+      chooseProduct();
       display();
     } else {
       total();
@@ -154,29 +153,3 @@ var wineglass = new Product(20, 'Wine Glass', 'wineglass');
 
 //call functions
 click();
-
-// sample code from adam
-// function displayPics() {
-//   var leftIndex = randNum();
-//   var leftProduct = allProducts[leftIndex];
-//   left.src = leftProduct.path;
-//   left.alt = leftProduct.name;
-//   leftProduct.views += 1;
-//   var centerIndex = randNum();
-//   while (centerIndex === leftIndex) {
-//     centerIndex = randNum();
-//   }
-//   var centerProduct = allProducts[centerIndex];
-//   center.src = centerProduct.path;
-//   center.alt = centerProduct.name;
-//   centerProduct.views += 1;
-//   var rightIndex = randNum();
-//   while (rightIndex === leftIndex || rightIndex === centerIndex) {
-//     rightIndex = randNum();
-//   }
-//   var rightProduct = allProducts[rightIndex];
-//   right.src = rightProduct.path;
-//   right.alt = rightProduct.name;
-//   rightProduct.views += 1;
-//   previouslyShown = [leftIndex, centerIndex, rightIndex];
-// }
