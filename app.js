@@ -4,14 +4,10 @@
 var numberArray = [];
 var pictureArray = [];
 var nameArray = [];
-var numberDisplayed = [0, 0, 0];
+var numberDisplayed = [];
 var pictureDisplayed = [];
 var nameDisplayed = [];
 var count = 0;
-
-// var numone = 0;
-// var numtwo = 0;
-// var numthree = 0;
 
 //product constructor
 function Product(number, description, picture) {
@@ -27,9 +23,7 @@ function Product(number, description, picture) {
 
 //creates random number
 function randomNumber() {
-  var min = Math.ceil(0);
-  var max = Math.floor(20);
-  return Math.floor(Math.random() * (max - min)) + min;
+  return Math.floor(Math.random() * (20 - 0)) + 0;
 };
 //chooses product to display
 function chooseProduct() {
@@ -43,6 +37,7 @@ function chooseProduct() {
   if (numberDisplayed.length > 3) {
     numberDisplayed.splice(0,3);
   };
+  console.log(numberDisplayed);
   pictureDisplayed.push(pictureArray[numberDisplayed[0]], pictureArray[numberDisplayed[1]], pictureArray[numberDisplayed[2]]);
   nameDisplayed.push(nameArray[numberDisplayed[0]], nameArray[numberDisplayed[1]], nameArray[numberDisplayed[2]]);
   nameArray[numberDisplayed[0]].shown++;
@@ -83,9 +78,13 @@ function click() {
   display();
   var formElOne = document.getElementById('one');
   formElOne.addEventListener('click', function(event) {
+    event.preventDefault();
+    event.stopPropagation();
     nameDisplayed[0].clicked++;
     count++;
     console.log(count);
+    pictureDisplayed = [];
+    nameDisplayed = [];
     if(count < 25) {
       chooseProduct();
       display();
@@ -96,12 +95,13 @@ function click() {
   },false);
   var formElTwo = document.getElementById('two');
   formElTwo.addEventListener('click', function(event) {
+    event.preventDefault();
+    event.stopPropagation();
     nameDisplayed[1].clicked++;
     count++;
     console.log(count);
-    // numberDisplayed = [];
-    // pictureDisplayed = [];
-    // nameDisplayed = [];
+    pictureDisplayed = [];
+    nameDisplayed = [];
     if(count < 25) {
       chooseProduct();
       display();
@@ -112,12 +112,13 @@ function click() {
   },false);
   var formElThree = document.getElementById('three');
   formElThree.addEventListener('click', function(event) {
+    event.preventDefault();
+    event.stopPropagation();
     nameDisplayed[2].clicked++;
     count++;
     console.log(count);
-    // numberDisplayed = [];
-    // pictureDisplayed = [];
-    // nameDisplayed = [];
+    pictureDisplayed = [];
+    nameDisplayed = [];
     if(count < 25) {
       chooseProduct();
       display();
@@ -152,48 +153,3 @@ var wineglass = new Product(20, 'Wine Glass', 'wineglass');
 
 //call functions
 click();
-
-// Function that chooses random number
-// function random() {
-// return Math.floor(Math.random() * products.length);
-// }
-
-// Function that chooses 3 random numbers without repeats
-// function chooseProduct() {
-//  var product;
-//  for (var i = 0; i < 3; i++) {
-//    do {
-//      product = random();
-//    }
-//    while (chosenProducts.includes(product));
-//    chosenProducts.push(product);
-//  }
-//  if (chosenProducts.length > 3) {
-//    chosenProducts.splice(0,3);
-//  }
-// }
-// sample code from adam
-// function displayPics() {
-//   var leftIndex = randNum();
-//   var leftProduct = allProducts[leftIndex];
-//   left.src = leftProduct.path;
-//   left.alt = leftProduct.name;
-//   leftProduct.views += 1;
-//   var centerIndex = randNum();
-//   while (centerIndex === leftIndex) {
-//     centerIndex = randNum();
-//   }
-//   var centerProduct = allProducts[centerIndex];
-//   center.src = centerProduct.path;
-//   center.alt = centerProduct.name;
-//   centerProduct.views += 1;
-//   var rightIndex = randNum();
-//   while (rightIndex === leftIndex || rightIndex === centerIndex) {
-//     rightIndex = randNum();
-//   }
-//   var rightProduct = allProducts[rightIndex];
-//   right.src = rightProduct.path;
-//   right.alt = rightProduct.name;
-//   rightProduct.views += 1;
-//   previouslyShown = [leftIndex, centerIndex, rightIndex];
-// }
