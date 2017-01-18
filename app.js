@@ -1,4 +1,5 @@
 'use strict';
+
 //global variables
 var numberArray = [];
 var pictureArray = [];
@@ -32,6 +33,10 @@ function randomNumber() {
     numtwo = Math.floor(Math.random() * (max - min)) + min;
     numthree = Math.floor(Math.random() * (max - min)) + min;
   } while (numone === numtwo || numone === numthree || numtwo === numthree);
+  //  || numberDisplayed[0] === numone || numberDisplayed[1] === numone || numberDisplayed[2] === numone || numberDisplayed[0] === numtwo || numberDisplayed[1] === numtwo || numberDisplayed[2] === numtwo || numberDisplayed[0] === numthree || numberDisplayed[1] === numthree || numberDisplayed[2] === numthree
+  // numberDisplayed = [];
+  // pictureDisplayed = [];
+  // nameDisplayed = [];
   numberDisplayed.push(numberArray[numone], numberArray[numtwo], numberArray[numthree]);
   pictureDisplayed.push(pictureArray[numone], pictureArray[numtwo], pictureArray[numthree]);
   nameDisplayed.push(nameArray[numone], nameArray[numtwo], nameArray[numthree]);
@@ -48,6 +53,20 @@ function display() {
   var inputElThree = document.getElementById('three');
   inputElThree.setAttribute('src', 'img/' + pictureDisplayed[2] + '.jpg');
 };
+//calculates percentage clicked
+function percent(clicked, shown) {
+  return ((clicked / shown) * 100).toFixed(2);
+}
+//prints totals/results list
+function total() {
+  var resultsEl = document.getElementById('results');
+  for (var w = 0; w < nameArray.length; w++) {
+    var resultsLi = document.createElement('li');
+    resultsLi.setAttribute('id', 'here');
+    resultsLi.textContent = pictureArray[w] + '- shown: ' + nameArray[w].shown + ', clicked: ' + nameArray[w].clicked + ', percentage clicked: ' + percent(nameArray[w].clicked, nameArray[w].shown) + '%';
+    resultsEl.appendChild(resultsLi);
+  };
+};
 //removes images
 function remove() {
   var removeEl = document.getElementById('form');
@@ -59,8 +78,6 @@ function click() {
   display();
   var formElOne = document.getElementById('one');
   formElOne.addEventListener('click', function(event) {
-    event.preventDefault();
-    event.stopPropagation();
     nameDisplayed[0].clicked++;
     count++;
     console.log(count);
@@ -79,8 +96,6 @@ function click() {
   },false);
   var formElTwo = document.getElementById('two');
   formElTwo.addEventListener('click', function(event) {
-    event.preventDefault();
-    event.stopPropagation();
     nameDisplayed[1].clicked++;
     count++;
     console.log(count);
@@ -99,8 +114,6 @@ function click() {
   },false);
   var formElThree = document.getElementById('three');
   formElThree.addEventListener('click', function(event) {
-    event.preventDefault();
-    event.stopPropagation();
     nameDisplayed[2].clicked++;
     count++;
     console.log(count);
@@ -116,20 +129,6 @@ function click() {
     };
   },false);
 };
-//prints totals
-function total() {
-  var resultsEl = document.getElementById('results');
-  for (var w = 0; w < nameArray.length; w++) {
-    var resultsLi = document.createElement('li');
-    resultsLi.setAttribute('id', 'here');
-    resultsLi.textContent = pictureArray[w] + ' shown: ' + nameArray[w].shown + ', clicked: ' + nameArray[w].clicked + ', percentage clicked: ' + percent(nameArray[w].clicked, nameArray[w].shown) + '%';
-    resultsEl.appendChild(resultsLi);
-  };
-};
-//calculates percent
-function percent(clicked, shown) {
-  return ((clicked / shown) * 100).toFixed(2);
-}
 
 //create all products
 var bag = new Product(1, 'Starwars Suitcase', 'bag');
@@ -152,5 +151,32 @@ var unicorn = new Product(17, 'Unicorn Meat Can', 'unicorn');
 var usb = new Product(18, 'Tentacle Usb', 'usb');
 var watercan = new Product(19, 'Watering Can', 'watercan');
 var wineglass = new Product(20, 'Wine Glass', 'wineglass');
+
 //call functions
 click();
+
+// sample code from adam
+// function displayPics() {
+//   var leftIndex = randNum();
+//   var leftProduct = allProducts[leftIndex];
+//   left.src = leftProduct.path;
+//   left.alt = leftProduct.name;
+//   leftProduct.views += 1;
+//   var centerIndex = randNum();
+//   while (centerIndex === leftIndex) {
+//     centerIndex = randNum();
+//   }
+//   var centerProduct = allProducts[centerIndex];
+//   center.src = centerProduct.path;
+//   center.alt = centerProduct.name;
+//   centerProduct.views += 1;
+//   var rightIndex = randNum();
+//   while (rightIndex === leftIndex || rightIndex === centerIndex) {
+//     rightIndex = randNum();
+//   }
+//   var rightProduct = allProducts[rightIndex];
+//   right.src = rightProduct.path;
+//   right.alt = rightProduct.name;
+//   rightProduct.views += 1;
+//   previouslyShown = [leftIndex, centerIndex, rightIndex];
+// }
