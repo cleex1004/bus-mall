@@ -111,12 +111,23 @@ function makeChart() {
 };
 //removes event listener
 function remove() {
-  var removeEL = document.getElementById('one');
-  removeEL.removeEventListener('click', function(event){
+  var removeEL1 = document.getElementById('one');
+  removeEL1.removeEventListener('click', function(event){
+    event.preventDefault();
+    event.stopPropagation();
+  });
+  var removeEL2 = document.getElementById('two');
+  removeEL2.removeEventListener('click', function(event){
+    event.preventDefault();
+    event.stopPropagation();
+  });
+  var removeEL3 = document.getElementById('three');
+  removeEL3.removeEventListener('click', function(event){
     event.preventDefault();
     event.stopPropagation();
   });
 };
+
 //logs clicks
 function click() {
   chooseProduct();
