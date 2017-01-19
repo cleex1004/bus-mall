@@ -65,6 +65,7 @@ function percent(clicked, shown) {
     return ((clicked / shown) * 100).toFixed(2);
   }
 };
+
 //makes chart
 function makeChart() {
   for(var k = 0; k < numberArray.length; k++) {
@@ -108,8 +109,14 @@ function makeChart() {
       }
     },
   });
+<<<<<<< HEAD
 };
 //removes event
+=======
+}
+
+//removes event listener
+>>>>>>> 6ff750376c0524cd6da6c915c20302ecc042c046
 function remove() {
   var removeEL = document.getElementById('one');
   removeEL.removeEventListener('click', function(event){
@@ -196,5 +203,5 @@ var usb = new Product(18, 'Tentacle Usb', 'usb');
 var watercan = new Product(19, 'Watering Can', 'watercan');
 var wineglass = new Product(20, 'Wine Glass', 'wineglass');
 
-//call functions
+//call function
 click();
