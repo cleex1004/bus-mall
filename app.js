@@ -8,6 +8,10 @@ var numberDisplayed = [];
 var pictureDisplayed = [];
 var nameDisplayed = [];
 var count = 0;
+var chartData = [];
+var chartData2 = [];
+var chartColors = [];
+var chartLabels = [];
 
 //product constructor
 function Product(number, description, picture) {
@@ -55,18 +59,58 @@ function display() {
 };
 //calculates percentage clicked
 function percent(clicked, shown) {
-  return ((clicked / shown) * 100).toFixed(2);
-}
-//prints totals/results list
-function total() {
-  var resultsEl = document.getElementById('results');
-  for (var j = 0; j < nameArray.length; j++) {
-    var resultsLi = document.createElement('li');
-    resultsLi.setAttribute('id', 'here');
-    resultsLi.textContent = pictureArray[j] + '- shown: ' + nameArray[j].shown + ', clicked: ' + nameArray[j].clicked + ', percentage clicked: ' + percent(nameArray[j].clicked, nameArray[j].shown) + '%';
-    resultsEl.appendChild(resultsLi);
-  };
+  if(((clicked / shown) * 100).toFixed(2) === 'NaN') {
+    return '0.00';
+  } else {
+    return ((clicked / shown) * 100).toFixed(2);
+  }
 };
+
+//makes chart
+function makeChart() {
+  for(var k = 0; k < numberArray.length; k++) {
+    chartData.push(nameArray[k].shown);
+    chartData2.push(nameArray[k].clicked);
+    chartLabels.push(pictureArray[k] + ' ' + percent(nameArray[k].clicked, nameArray[k].shown) + '%');
+    // chartLabels.push(percent(nameArray[k].clicked, nameArray[k].shown) + '%');
+    chartColors.push('#191970');
+    chartColors.push('#0000FF');
+  };
+  var context = document.getElementById('chart').getContext('2d');
+  Chart.defaults.global.defaultFontColor = '#000099';
+  Chart.defaults.global.defaultFontSize = 14;
+  var productChart = new Chart(context, {
+    type: 'bar',
+    data: {
+      labels: chartLabels,
+      datasets: [
+        {
+          type: 'bar',
+          label: '# of times product shown',
+          data: chartData,
+          backgroundColor:'#191970'
+        },
+        {
+          type: 'bar',
+          label: '# of times product clicked',
+          data: chartData2,
+          backgroundColor:'#0000FF'
+        }
+      ]
+    },
+    options: {
+      responsive: false,
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero: true
+          }
+        }]
+      }
+    },
+  });
+}
+
 //removes event listener
 function remove() {
   var removeEL = document.getElementById('one');
@@ -92,7 +136,7 @@ function click() {
       chooseProduct();
       display();
     } else {
-      total();
+      makeChart();
       remove();
     };
   },false);
@@ -109,7 +153,7 @@ function click() {
       chooseProduct();
       display();
     } else {
-      total();
+      makeChart();
       remove();
     };
   },false);
@@ -126,7 +170,7 @@ function click() {
       chooseProduct();
       display();
     } else {
-      total();
+      makeChart();
       remove();
     };
   },false);
