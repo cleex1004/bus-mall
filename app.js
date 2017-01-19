@@ -67,10 +67,13 @@ function total() {
     resultsEl.appendChild(resultsLi);
   };
 };
-//removes images
+//removes event listener
 function remove() {
-  var removeEl = document.getElementById('form');
-  removeEl.parentElement.removeChild(removeEl);
+  var removeEL = document.getElementById('one');
+  removeEL.removeEventListener('click', function(event){
+    event.preventDefault();
+    event.stopPropagation();
+  });
 };
 //logs clicks
 function click() {
@@ -151,5 +154,5 @@ var usb = new Product(18, 'Tentacle Usb', 'usb');
 var watercan = new Product(19, 'Watering Can', 'watercan');
 var wineglass = new Product(20, 'Wine Glass', 'wineglass');
 
-//call functions
+//call function
 click();
