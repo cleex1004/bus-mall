@@ -12,13 +12,21 @@ h2 {
   font-family: 'aldrich';
   text-align: center;
   font-size: 35px;
-
 }
 ul {
   font-size: 20px;
 }
+canvas {
+  display: inline-block;
+  margin: auto;
+  width: 90%;
+}
 #form {
   font-size: 25px;
+}
+#chart {
+  align-content: center;
+  align-self: center;
 }
 #head {
   border: 3px dotted #e60000;
