@@ -109,10 +109,14 @@ function makeChart() {
     },
   });
 }
-//removes images
+
+//removes event
 function remove() {
-  var removeEl = document.getElementById('form');
-  removeEl.parentElement.removeChild(removeEl);
+  var removeEL = document.getElementById('one');
+  removeEL.removeEventListener('click', function(event){
+    event.preventDefault();
+    event.stopPropagation();
+  });
 };
 //logs clicks
 function click() {
