@@ -24,7 +24,8 @@ ul {
 canvas {
   display: inline-block;
   margin: auto;
-  width: 90%;
+  width: 1280px;
+  height: 600px;
 }
 #form {
   font-size: 25px;
