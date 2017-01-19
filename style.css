@@ -18,6 +18,10 @@ fieldset {
   padding: 20px;
   text-align: center;
 }
+input {
+  height: 320px;
+  max-width: 500px;
+}
 ul {
   font-size: 20px;
 }
