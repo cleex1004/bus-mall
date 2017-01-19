@@ -65,20 +65,19 @@ function percent(clicked, shown) {
     return ((clicked / shown) * 100).toFixed(2);
   }
 };
-
 //makes chart
 function makeChart() {
   for(var k = 0; k < numberArray.length; k++) {
     chartData.push(nameArray[k].shown);
     chartData2.push(nameArray[k].clicked);
     chartLabels.push(pictureArray[k] + ' ' + percent(nameArray[k].clicked, nameArray[k].shown) + '%');
-    // chartLabels.push(percent(nameArray[k].clicked, nameArray[k].shown) + '%');
-    chartColors.push('#191970');
-    chartColors.push('#0000FF');
+    // chartColors.push('#191970');
+    // chartColors.push('#0000FF');
   };
   var context = document.getElementById('chart').getContext('2d');
   Chart.defaults.global.defaultFontColor = '#000099';
   Chart.defaults.global.defaultFontSize = 14;
+  Chart.defaults.global.defaultFontFamily = 'helvetica';
   var productChart = new Chart(context, {
     type: 'bar',
     data: {
@@ -109,8 +108,7 @@ function makeChart() {
       }
     },
   });
-}
-
+};
 //removes event listener
 function remove() {
   var removeEL = document.getElementById('one');
