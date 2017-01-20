@@ -57,6 +57,49 @@ function display() {
   var inputElThree = document.getElementById('three');
   inputElThree.setAttribute('src', 'img/' + pictureDisplayed[2] + '.jpg');
 };
+// event function
+function clickEvent0(event) {
+  nameDisplayed[0].clicked++;
+  count++;
+  console.log(count);
+  pictureDisplayed = [];
+  nameDisplayed = [];
+  if(count < 25) {
+    chooseProduct();
+    display();
+  } else {
+    makeChart();
+    remove();
+  };
+};
+function clickEvent1(event) {
+  nameDisplayed[1].clicked++;
+  count++;
+  console.log(count);
+  pictureDisplayed = [];
+  nameDisplayed = [];
+  if(count < 25) {
+    chooseProduct();
+    display();
+  } else {
+    makeChart();
+    remove();
+  };
+};
+function clickEvent2(event) {
+  nameDisplayed[2].clicked++;
+  count++;
+  console.log(count);
+  pictureDisplayed = [];
+  nameDisplayed = [];
+  if(count < 25) {
+    chooseProduct();
+    display();
+  } else {
+    makeChart();
+    remove();
+  };
+};
 //calculates percentage clicked
 function percent(clicked, shown) {
   if(((clicked / shown) * 100).toFixed(2) === 'NaN') {
@@ -112,77 +155,23 @@ function makeChart() {
 //removes event listener
 function remove() {
   var removeEL1 = document.getElementById('one');
-  removeEL1.removeEventListener('click', function(event){
-    event.preventDefault();
-    event.stopPropagation();
-  });
+  removeEL1.removeEventListener('click', clickEvent0, false);
   var removeEL2 = document.getElementById('two');
-  removeEL2.removeEventListener('click', function(event){
-    event.preventDefault();
-    event.stopPropagation();
-  });
+  removeEL2.removeEventListener('click', clickEvent1, false);
   var removeEL3 = document.getElementById('three');
-  removeEL3.removeEventListener('click', function(event){
-    event.preventDefault();
-    event.stopPropagation();
-  });
+  removeEL3.removeEventListener('click', clickEvent2, false);
 };
 
 //logs clicks
 function click() {
   chooseProduct();
   display();
-  var formElOne = document.getElementById('one');
-  formElOne.addEventListener('click', function(event) {
-    event.preventDefault();
-    event.stopPropagation();
-    nameDisplayed[0].clicked++;
-    count++;
-    console.log(count);
-    pictureDisplayed = [];
-    nameDisplayed = [];
-    if(count < 25) {
-      chooseProduct();
-      display();
-    } else {
-      makeChart();
-      remove();
-    };
-  },false);
-  var formElTwo = document.getElementById('two');
-  formElTwo.addEventListener('click', function(event) {
-    event.preventDefault();
-    event.stopPropagation();
-    nameDisplayed[1].clicked++;
-    count++;
-    console.log(count);
-    pictureDisplayed = [];
-    nameDisplayed = [];
-    if(count < 25) {
-      chooseProduct();
-      display();
-    } else {
-      makeChart();
-      remove();
-    };
-  },false);
-  var formElThree = document.getElementById('three');
-  formElThree.addEventListener('click', function(event) {
-    event.preventDefault();
-    event.stopPropagation();
-    nameDisplayed[2].clicked++;
-    count++;
-    console.log(count);
-    pictureDisplayed = [];
-    nameDisplayed = [];
-    if(count < 25) {
-      chooseProduct();
-      display();
-    } else {
-      makeChart();
-      remove();
-    };
-  },false);
+  var imgElOne = document.getElementById('one');
+  imgElOne.addEventListener('click', clickEvent0, false);
+  var imgElTwo = document.getElementById('two');
+  imgElTwo.addEventListener('click', clickEvent1,false);
+  var imgElThree = document.getElementById('three');
+  imgElThree.addEventListener('click', clickEvent2, false);
 };
 
 //create all products
