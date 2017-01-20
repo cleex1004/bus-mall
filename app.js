@@ -12,6 +12,10 @@ var chartData = [];
 var chartData2 = [];
 var chartColors = [];
 var chartLabels = [];
+var locstorshown = [];
+var locstorclicked = [];
+var locshown;
+var locclicked;
 
 //product constructor
 function Product(number, description, picture) {
@@ -57,49 +61,6 @@ function display() {
   var inputElThree = document.getElementById('three');
   inputElThree.setAttribute('src', 'img/' + pictureDisplayed[2] + '.jpg');
 };
-// event function
-function clickEvent0(event) {
-  nameDisplayed[0].clicked++;
-  count++;
-  console.log(count);
-  pictureDisplayed = [];
-  nameDisplayed = [];
-  if(count < 25) {
-    chooseProduct();
-    display();
-  } else {
-    makeChart();
-    remove();
-  };
-};
-function clickEvent1(event) {
-  nameDisplayed[1].clicked++;
-  count++;
-  console.log(count);
-  pictureDisplayed = [];
-  nameDisplayed = [];
-  if(count < 25) {
-    chooseProduct();
-    display();
-  } else {
-    makeChart();
-    remove();
-  };
-};
-function clickEvent2(event) {
-  nameDisplayed[2].clicked++;
-  count++;
-  console.log(count);
-  pictureDisplayed = [];
-  nameDisplayed = [];
-  if(count < 25) {
-    chooseProduct();
-    display();
-  } else {
-    makeChart();
-    remove();
-  };
-};
 //calculates percentage clicked
 function percent(clicked, shown) {
   if(((clicked / shown) * 100).toFixed(2) === 'NaN') {
@@ -114,8 +75,6 @@ function makeChart() {
     chartData.push(nameArray[k].shown);
     chartData2.push(nameArray[k].clicked);
     chartLabels.push(pictureArray[k] + ' ' + percent(nameArray[k].clicked, nameArray[k].shown) + '%');
-    // chartColors.push('#191970');
-    // chartColors.push('#0000FF');
   };
   var context = document.getElementById('chart').getContext('2d');
   Chart.defaults.global.defaultFontColor = '#000099';
@@ -161,8 +120,87 @@ function remove() {
   var removeEL3 = document.getElementById('three');
   removeEL3.removeEventListener('click', clickEvent2, false);
 };
-
-//logs clicks
+// sum function
+function sum(a, b) {
+  return (a + b);
+};
+//checks if local storage has data makes arrays
+function locStorGet() {
+  var test = localStorage.getItem('length');
+  test = JSON.parse(test);
+  console.log(test + 'test');
+  if (test === 2) {
+    var locshown = localStorage.getItem('shown');
+    var locclicked = localStorage.getItem('clicked');
+    locshown = JSON.parse(locshown);
+    locclicked = JSON.parse(locclicked);
+    for(var n = 0; n < nameArray.length; n++) {
+      locstorshown.push(sum(nameArray[n].shown, locshown[n]));
+      locstorclicked.push(sum(nameArray[n].clicked, locclicked[n]));
+    };
+  } else {
+    for(var m = 0; m < nameArray.length; m++) {
+      locstorshown.push(nameArray[m].shown);
+      locstorclicked.push(nameArray[m].clicked);
+    };
+  };
+};
+//into local storage
+function locStorSet() {
+  localStorage.setItem('shown', JSON.stringify(locstorshown));
+  localStorage.setItem('clicked', JSON.stringify(locstorclicked));
+  localStorage.setItem('length', JSON.stringify(2));
+};
+// event function
+function clickEvent0(event) {
+  nameDisplayed[0].clicked++;
+  count++;
+  console.log(count);
+  pictureDisplayed = [];
+  nameDisplayed = [];
+  if(count < 25) {
+    chooseProduct();
+    display();
+  } else {
+    makeChart();
+    remove();
+    locStorGet();
+    locStorSet();
+  };
+};
+function clickEvent1(event) {
+  nameDisplayed[1].clicked++;
+  count++;
+  console.log(count);
+  pictureDisplayed = [];
+  nameDisplayed = [];
+  if(count < 25) {
+    chooseProduct();
+    display();
+  } else {
+    makeChart();
+    remove();
+    locStorGet();
+    locStorSet();
+  };
+};
+function clickEvent2(event) {
+  nameDisplayed[2].clicked++;
+  count++;
+  console.log(count);
+  pictureDisplayed = [];
+  nameDisplayed = [];
+  if(count < 25) {
+    chooseProduct();
+    display();
+  } else {
+    makeChart();
+    remove();
+    locStorGet();
+    locStorSet();
+  };
+};
+//click function
 function click() {
   chooseProduct();
   display();
