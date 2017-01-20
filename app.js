@@ -128,7 +128,6 @@ function sum(a, b) {
 function locStorGet() {
   var test = localStorage.getItem('length');
   test = JSON.parse(test);
-  console.log(test + 'test');
   if (test === 2) {
     var locshown = localStorage.getItem('shown');
     var locclicked = localStorage.getItem('clicked');
@@ -234,5 +233,5 @@ var usb = new Product(18, 'Tentacle Usb', 'usb');
 var watercan = new Product(19, 'Watering Can', 'watercan');
 var wineglass = new Product(20, 'Wine Glass', 'wineglass');
 
-//call function
+//call functions
 click();
