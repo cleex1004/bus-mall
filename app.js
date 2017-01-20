@@ -12,6 +12,8 @@ var chartData = [];
 var chartData2 = [];
 var chartColors = [];
 var chartLabels = [];
+var locstorshown = [];
+var locstorclick = [];
 
 //product constructor
 function Product(number, description, picture) {
@@ -57,6 +59,17 @@ function display() {
   var inputElThree = document.getElementById('three');
   inputElThree.setAttribute('src', 'img/' + pictureDisplayed[2] + '.jpg');
 };
+function locStor() {
+  for(var m = 0; m < nameArray.length; m++){
+    locstorshown.push(nameArray[m].shown);
+    locstorclick.push(nameArray[m].clicked);
+  };
+  localStorage.setItem('shown', JSON.stringify(locstorshown));
+  localStorage.setItem('clicked', JSON.stringify(locstorclick));
+};
+function locStorGet() {
+  localStorage.getItem('shown');
+}
 // event function
 function clickEvent0(event) {
   nameDisplayed[0].clicked++;
@@ -64,12 +77,14 @@ function clickEvent0(event) {
   console.log(count);
   pictureDisplayed = [];
   nameDisplayed = [];
-  if(count < 25) {
+  if(count < 10) {
     chooseProduct();
     display();
   } else {
     makeChart();
     remove();
+    locStor();
+    // pen.persistToLocalStorage();
   };
 };
 function clickEvent1(event) {
@@ -78,12 +93,14 @@ function clickEvent1(event) {
   console.log(count);
   pictureDisplayed = [];
   nameDisplayed = [];
-  if(count < 25) {
+  if(count < 10) {
     chooseProduct();
     display();
   } else {
     makeChart();
     remove();
+    locStor();
+    // pen.persistToLocalStorage();
   };
 };
 function clickEvent2(event) {
@@ -92,12 +109,14 @@ function clickEvent2(event) {
   console.log(count);
   pictureDisplayed = [];
   nameDisplayed = [];
-  if(count < 25) {
+  if(count < 10) {
     chooseProduct();
     display();
   } else {
     makeChart();
     remove();
+    locStor();
+    // pen.persistToLocalStorage();
   };
 };
 //calculates percentage clicked
@@ -195,6 +214,8 @@ var unicorn = new Product(17, 'Unicorn Meat Can', 'unicorn');
 var usb = new Product(18, 'Tentacle Usb', 'usb');
 var watercan = new Product(19, 'Watering Can', 'watercan');
 var wineglass = new Product(20, 'Wine Glass', 'wineglass');
-
+// Product.prototype.persistToLocalStorage = function() {
+//   localStorage.dragon = JSON.stringify(dragon.clicked + ' clicked ' + dragon.shown + ' shown');
+// };
 //call function
 click();
