@@ -12,10 +12,10 @@ var chartData = [];
 var chartData2 = [];
 var chartColors = [];
 var chartLabels = [];
-var locstorshown = [];
-var locstorclicked = [];
-var locshown;
-var locclicked;
+var locStorShown = [];
+var locStorClicked = [];
+var locShown;
+var locClicked;
 
 //product constructor
 function Product(number, description, picture) {
@@ -128,27 +128,28 @@ function sum(a, b) {
 function locStorGet() {
   var test = localStorage.getItem('length');
   test = JSON.parse(test);
+  console.log(test + 'ls length');
   if (test === 2) {
-    var locshown = localStorage.getItem('shown');
-    var locclicked = localStorage.getItem('clicked');
-    locshown = JSON.parse(locshown);
-    locclicked = JSON.parse(locclicked);
+    var locShown = localStorage.getItem('shown');
+    var locClicked = localStorage.getItem('clicked');
+    locShown = JSON.parse(locShown);
+    locClicked = JSON.parse(locClicked);
     for(var n = 0; n < nameArray.length; n++) {
-      locstorshown.push(sum(nameArray[n].shown, locshown[n]));
-      locstorclicked.push(sum(nameArray[n].clicked, locclicked[n]));
+      locStorShown.push(sum(nameArray[n].shown, locShown[n]));
+      locStorClicked.push(sum(nameArray[n].clicked, locClicked[n]));
     };
   } else {
     for(var m = 0; m < nameArray.length; m++) {
-      locstorshown.push(nameArray[m].shown);
-      locstorclicked.push(nameArray[m].clicked);
+      locStorShown.push(nameArray[m].shown);
+      locStorClicked.push(nameArray[m].clicked);
     };
   };
 };
 //into local storage
 function locStorSet() {
-  localStorage.setItem('shown', JSON.stringify(locstorshown));
-  localStorage.setItem('clicked', JSON.stringify(locstorclicked));
-  localStorage.setItem('length', JSON.stringify(2));
+  localStorage.setItem('shown', JSON.stringify(locStorShown));
+  localStorage.setItem('clicked', JSON.stringify(locStorClicked));
+  // localStorage.setItem('length', JSON.stringify(2));
 };
 // event function
 function clickEvent0(event) {
